@@ -75,7 +75,7 @@ ggplot(midwest, aes(x = area, y = poptotal)) +
 
 
 ```{r, out.width='20%', fig.align='center', fig.cap='我的女神', echo = F}
-knitr::include_graphics("my_girl.jpg")
+knitr::include_graphics("./images/my_girl.jpg")
 ```
 
 
