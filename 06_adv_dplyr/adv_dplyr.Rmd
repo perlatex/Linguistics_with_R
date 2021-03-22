@@ -109,6 +109,51 @@ penguins %>%  select(!where(is.character))
 ```
 
 
+## 寻找男企鹅
+
+函数 `filter()` 中的逻辑运算符
+
+Operator  | Meaning
+----------|--------
+`==`      | Equal to
+`>`       | Greater than
+`<`       | Less than
+`>=`      | Greater than or equal to
+`<=`      | Less than or equal to
+`!=`      | Not equal to
+`%in%`    | in 
+`is.na`   | is a missing value (NA)
+`!is.na`  | is not a missing value
+`&`       | and
+`|`       | or
+
+
+```{r}
+penguins %>% filter(sex == "male")
+```
+
+```{r}
+penguins %>% filter(species %in% c("Adelie", "Gentoo"))
+```
+
+## 弱水三千，只取一瓢
+```{r}
+penguins %>% 
+  slice(1)
+```
+```{r}
+penguins %>% 
+  group_by(species) %>% 
+  slice(1)
+```
+```{r}
+penguins %>% 
+  arrange(-bill_length_mm) %>% 
+  slice(1)
+
+penguins %>% 
+  slice_max(bill_length_mm)
+```
 
 ## 寻找企鹅中的胖子
 
@@ -259,6 +304,11 @@ std <- function(x) {
 ```
 
 
+- 以下是你们师姐整理的成都话声调数据，要求数据预处理：按声调type分组，计算时间time的平均以及p0到p100列的对数(log10)
+```{r}
+d <- readr::read_rds("./demo_data/ChineseTones.rds")
+d
+```
 
 
 
