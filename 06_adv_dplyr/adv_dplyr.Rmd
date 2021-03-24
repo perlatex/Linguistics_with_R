@@ -108,6 +108,13 @@ penguins %>% select(where(is.character))
 penguins %>%  select(!where(is.character))
 ```
 
+## 可以多种组合
+
+```{r}
+penguins %>% select(species, starts_with("bill_"))
+```
+
+
 
 ## 寻找男企鹅
 
@@ -136,16 +143,28 @@ penguins %>% filter(sex == "male")
 penguins %>% filter(species %in% c("Adelie", "Gentoo"))
 ```
 
+
+```{r}
+penguins %>%
+  filter(species == "Adelie" &  bill_length_mm > 40 )
+```
+
+
+
 ## 弱水三千，只取一瓢
 ```{r}
 penguins %>% 
   slice(1)
 ```
+
+
 ```{r}
 penguins %>% 
   group_by(species) %>% 
   slice(1)
 ```
+
+
 ```{r}
 penguins %>% 
   arrange(-bill_length_mm) %>% 
@@ -170,14 +189,16 @@ penguins %>% mutate(
 ```{r}
 penguins %>% mutate(
   body = case_when(
-    body_mass_g < 3500 ~ "best",
+    body_mass_g < 3500                       ~ "best",
     body_mass_g >= 3500 & body_mass_g < 4500 ~ "good",
     body_mass_g >= 4500 & body_mass_g < 5500 ~ "general",
-    TRUE ~ "other"
+    TRUE                                     ~ "other"
   )
 )
 ```
 
+
+随堂练习：按嘴峰长度分成A, B, C, D 4个等级
 
 
 
@@ -244,7 +265,7 @@ penguins %>%
 ```
 
 
-更安全的写法
+更安全、更简练的写法
 ```{r}
 penguins %>%
   summarize(
@@ -290,13 +311,13 @@ penguins %>%
 
 # 作业
 
-- 好身材的比例，男宝宝多还是女宝宝多？
+1. 好身材的比例，男宝宝多还是女宝宝多？
 
-- 不同岛屿的女企鹅的嘴峰深度均值不同？
+2. 不同岛屿的女企鹅的嘴峰深度均值不同？
 
-- 每种类型企鹅，各种体征属性的均值？
+3. 每种类型企鹅，各种体征属性的均值？
 
-- 各种体征属性的标准化（提示，标准化函数如下）
+4. 各种体征属性的标准化（提示，标准化函数如下）
 ```{r}
 std <- function(x) {
    (x - mean(x)) / sd(x)
@@ -304,16 +325,19 @@ std <- function(x) {
 ```
 
 
-- 以下是你们师姐整理的成都话声调数据，要求数据预处理：按声调type分组，计算时间time的平均以及p0到p100列的对数(log10)
+5. 以下是你们师姐整理的成都话声调数据，要求数据预处理：按声调type分组，计算时间time的平均以及p0到p100列的对数(log10)，
+
 ```{r}
 d <- readr::read_rds("./demo_data/ChineseTones.rds")
 d
 ```
 
+3,4,5题推荐使用 `across()`
 
 
 
-# 下节课内容
+
+# 下节课讲可视化
 
 ## 我图都画的这么骚了，你确定不来听课？
 
