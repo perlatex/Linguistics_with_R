@@ -1,0 +1,102 @@
+---
+title: "advance dplyr answer"
+subtitle: "企鹅的故事"
+author: "王小二"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: flatly
+    highlight: pygments
+    code_download: true
+    toc: true
+    toc_float: true
+    number_sections: true
+    df_print: paged
+---
+
+
+
+# 数据
+```{r message = FALSE, warning = FALSE}
+library(tidyverse)
+
+penguins <- read_csv("./demo_data/penguins.csv") 
+penguins
+```
+
+
+
+
+# 作业
+
+1. 好身材的比例，男宝宝多还是女宝宝多？
+```{r}
+penguins %>% 
+  mutate(
+    isfit = if_else(body_mass_g > 4200, 0 , 1)
+  ) %>% 
+  group_by(sex) %>% 
+  summarise(
+    fit_prop = sum(isfit) / n()
+  )
+```
+
+
+
+2. 不同岛屿的女企鹅的嘴峰深度均值不同？
+```{r}
+penguins %>%
+  filter(sex == "female") %>% 
+  group_by(island) %>%
+  summarise(
+    mean = mean(bill_depth_mm)
+  )
+```
+3. 每种类型企鹅，各种体征属性的均值？
+```{r}
+penguins %>%
+  group_by(species) %>% 
+  summarize(
+     across(c(bill_depth_mm, bill_length_mm, flipper_length_mm, body_mass_g), mean)
+ )
+```
+
+
+```{r}
+penguins %>%
+  group_by(species) %>% 
+  summarize(
+     across(ends_with("_mm") | ends_with("_g"), mean)
+ )
+```
+
+
+
+4. 各种体征属性的标准化（提示，标准化函数如下）
+```{r}
+std <- function(x) {
+   (x - mean(x)) / sd(x)
+}
+
+penguins %>%
+  group_by(species) %>% 
+  summarize(
+     across(ends_with("_mm") | ends_with("_g"), std)
+ )
+```
+
+
+
+5. 以下是你们师姐整理的成都话声调数据。要求数据预处理：按声调type分组，计算p0到p100列以及time列的平均值，然后计算p0到p100列均值的对数(log10)，
+
+```{r}
+d <- readr::read_rds("./demo_data/ChineseTones.rds")
+
+d %>% 
+  group_by(type) %>% 
+  summarise(
+    across(where(is.numeric), mean),
+    across(p0:p100, log10)
+  )
+```
+

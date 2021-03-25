@@ -325,7 +325,7 @@ std <- function(x) {
 ```
 
 
-5. 以下是你们师姐整理的成都话声调数据，要求数据预处理：按声调type分组，计算时间time的平均以及p0到p100列的对数(log10)，
+5. 以下是你们师姐整理的成都话声调数据。要求数据预处理：按声调type分组，计算p0到p100列以及time列的平均值，然后计算p0到p100列均值的对数(log10)，
 
 ```{r}
 d <- readr::read_rds("./demo_data/ChineseTones.rds")
