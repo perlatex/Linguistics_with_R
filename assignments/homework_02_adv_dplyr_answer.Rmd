@@ -15,19 +15,16 @@ output:
 ---
 
 
+# 作业
 
-# 数据
 ```{r message = FALSE, warning = FALSE}
 library(tidyverse)
 
-penguins <- read_csv("./demo_data/penguins.csv") 
+penguins <- read_csv("./data/penguins.csv") 
 penguins
 ```
 
 
-
-
-# 作业
 
 1. 好身材的比例，男宝宝多还是女宝宝多？
 ```{r}
@@ -52,6 +49,8 @@ penguins %>%
     mean = mean(bill_depth_mm)
   )
 ```
+
+
 3. 每种类型企鹅，各种体征属性的均值？
 ```{r}
 penguins %>%
@@ -61,7 +60,7 @@ penguins %>%
  )
 ```
 
-
+或者
 ```{r}
 penguins %>%
   group_by(species) %>% 
@@ -91,12 +90,26 @@ penguins %>%
 
 ```{r}
 d <- readr::read_rds("./demo_data/ChineseTones.rds")
+d
+```
 
+
+```{r}
 d %>% 
   group_by(type) %>% 
   summarise(
     across(where(is.numeric), mean),
     across(p0:p100, log10)
+  )
+```
+
+或者
+```{r}
+d %>% 
+  group_by(type) %>% 
+  summarise(
+    across(where(is.numeric), mean),
+    across(starts_with("p"), log10)
   )
 ```
 
