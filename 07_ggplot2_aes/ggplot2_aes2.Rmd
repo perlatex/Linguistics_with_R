@@ -79,12 +79,16 @@ library(tidyverse)
 d <- read_csv("./demo_data/temp_carbon.csv")
 d
 ```
+```{r, eval = FALSE}
+library(ggplot2)
+ggplot(data = ___, mapping = aes(x = ___, y = ____)) +
+  geom__****()
+```
 
 
 ```{r}
-library(ggplot2)
 ggplot(data = d, mapping = aes(x = year, y = carbon_emissions)) +
-  geom_line() +
+  geom_point() +
   xlab("Year") +
   ylab("Carbon emissions (metric tons)") +
   ggtitle("Annual global carbon emissions, 1880-2014")
@@ -146,6 +150,14 @@ ggplot(penguins) +
   geom_point(aes(x = bill_length_mm, y = bill_depth_mm, alpha = species))
 ```
 
+也可更多映射
+
+```{r}
+ggplot(penguins) +
+  geom_point(
+    aes(x = bill_length_mm, y = bill_depth_mm, color = species, alpha = sex)
+  )
+```
 
 
 为什么图中出现的是这样的颜色呢？因为`ggplot()`内部有一套默认的设置
@@ -257,8 +269,8 @@ ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
 
 
 ```{r}
-ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
-  geom_point(aes(color = sex))
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = sex)) +
+  geom_point(aes(color = species))
 ```
 
 
