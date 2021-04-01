@@ -26,11 +26,11 @@ penguins
 
 
 
-1. 好身材的比例，男宝宝多还是女宝宝多？
+1. 好身材的比例，男宝宝多还是女宝宝多？(提示，先假定一个好身材的标准，比如体重body_mass_g 低于 4200，就是好身材，那么，让新建的变量isfit为1，否则为0；然后按照性别分组，统计每组里1的个数占总数的比例)
 ```{r}
 penguins %>% 
-  mutate(
-    isfit = if_else(body_mass_g > 4200, 0 , 1)
+   mutate(
+    isfit = if_else(body_mass_g < 4200, 1, 0)
   ) %>% 
   group_by(sex) %>% 
   summarise(
