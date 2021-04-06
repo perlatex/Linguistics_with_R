@@ -110,11 +110,16 @@ penguins %>%
 ```
 
 
-是好图吗？怎么改进？排序，配色，翻转？
+是好图吗？怎么改进？
+
+- 排序 
+- 翻转 
+- 配色
 
 
-
-
+```{block}
+色彩是一种很强的刺激（信息），一般会有三种作用：分组，强调，量化
+```
 
 
 
@@ -249,7 +254,7 @@ penguins %>%
 ```
 
 
-还有一种分组方法，就是***分面**
+还有一种分组方法，就是**分面**
 ```{r}
 penguins %>% 
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
@@ -328,7 +333,7 @@ penguins %>%
   stat_ellipse()
 ```
 
-不同物种想有各自的椭圆图？
+每个物种想有各自的椭圆图？
 
 
 
@@ -349,6 +354,7 @@ penguins %>%
 - `ggridges::geom_density_ridges()`
 - `stat_ellipse()`
 - `facet_wrap()`
+- `fct_reorder()`
 
 
 
