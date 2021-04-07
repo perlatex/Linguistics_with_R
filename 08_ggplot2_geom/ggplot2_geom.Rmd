@@ -330,7 +330,7 @@ tb %>%
 penguins %>%
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
   geom_point() +
-  stat_ellipse()
+  geom_path(stat = "ellipse")
 ```
 
 每个物种想有各自的椭圆图？
@@ -352,7 +352,7 @@ penguins %>%
 - `geom_violin()`
 - `geom_text()`
 - `ggridges::geom_density_ridges()`
-- `stat_ellipse()`
+- `geom_path()`
 - `facet_wrap()`
 - `fct_reorder()`
 
