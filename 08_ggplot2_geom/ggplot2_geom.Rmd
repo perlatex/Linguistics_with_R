@@ -1,5 +1,5 @@
 ---
-title: "ggplot2之几何对象"
+title: "ggplot2之几何图形"
 author: "王小二"
 date: "`r Sys.Date()`"
 output: 
@@ -32,7 +32,7 @@ knitr::include_graphics("images/ggplot_template.png")
 1. `data`: 数据框data.frame (注意，不支持向量vector和列表list类型）
 
 
-2. `geoms`: 几何对象，确定我们想画什么样的图，一个`geom_***`确定一种图形。比如
+2. `geoms`: 几何图形，确定我们想画什么样的图，一个`geom_***`确定一种图形。比如
     - `geom_point()` 画点图
     - `geom_line()`  画折线图
     - `geom_smooth()`画平滑曲线
@@ -88,19 +88,22 @@ penguins
 ```
 
 
-## 每个岛屿有多少企鹅
+## 每个种类有多少企鹅
 
-可以先统计每个岛屿的数量，然后画出来
+统计每个种类企鹅的数量，然后画出来
+
+按照常规的思路，我们一般会先统计，然后喂给ggplot，
 ```{r}
 penguins %>% 
   count(species) %>% 
+  
   ggplot(aes(x = species, y = n)) +
   geom_point()
 ```
 
 
 
-这种情形，常用柱状图
+这种情形，常用柱状图，因此可以选择`geom_col()`这种几何图形
 
 ```{r}
 penguins %>% 
@@ -118,7 +121,7 @@ penguins %>%
 
 
 ```{block}
-色彩是一种很强的刺激（信息），一般会有三种作用：分组，强调，量化
+色彩是一种很强的刺激（信息），一般会有三种作用：分组，强调，量化。如果你的图不想表达这三种意思，那图中尽可能的不要用太多色彩
 ```
 
 
@@ -139,7 +142,7 @@ penguins %>%
     geom_density()
 ```
 
-为什么是两个峰？如何探究背后的原因？
+为什么是两个峰？如何探究背后的原因？种类不同导致的？性别不同导致的？还是所在岛屿不同导致的？
 
 
 
@@ -147,7 +150,7 @@ penguins %>%
 
 ## 不同种类，嘴峰长度分布
 
-这里一个是离散变量，一个是连续变量。方法有很多
+这里一个是离散变量，一个是连续变量。可以选择不同的几何图形来呈现
 
 
 ### 散点图
@@ -264,6 +267,14 @@ penguins %>%
 
 还可以弄得更漂亮点吗？
 
+```{r}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point(data = penguins %>% select(-species), color = "gray80") +
+  geom_point(aes(color = species)) +
+  facet_wrap(vars(species))
+```
+
 
 
 ## 图层叠加
@@ -296,31 +307,24 @@ penguins %>%
 
 
 
-
-
-
-
 ## 添加文本标签
 
 如何在点的位置**添加**具体数值文本？
 
+
 ```{r}
-tb <- penguins %>%
-  group_by(sex, species) %>%
-  summarise(
-    across(bill_length_mm, mean)
-  ) %>%
-  ungroup()
-tb
+penguins %>%
+  ggplot(aes(x = sex, y = body_mass_g)) +
+  geom_jitter() +
+  geom_point(
+    data = m, aes(y = mean), size = 5, color = "red"
+  ) +
+  geom_text(data = m, 
+            aes(x = sex, y = mean, label = round(mean, 2)), 
+            color = "red", vjust = -1)
 ```
 
 
-```{r}
-tb %>%
-  ggplot(aes(x = sex, y = bill_length_mm)) +
-  geom_point() +
-  geom_text(aes(label = species))
-```
 
 
 
