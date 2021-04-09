@@ -37,9 +37,9 @@ knitr::include_graphics("images/mapping.png")
 
 ggplot2有一套优雅的绘图语法，包名中“gg”是grammar of graphics的简称。Hadley Wickham将这套可视化语法诠释为:
 
-一张统计图形就是从**数据**到几何对象(geometric object，缩写geom)的**图形属性**(aesthetic attribute，缩写aes)的一个映射。
+一张统计图形就是从**数据**到几何图形(geometric object，缩写geom)所包含的**图形属性**(aesthetic attribute，缩写aes)的一种映射。
 
-> 说人话：我们画一张散点图，就要把 数据框的两个变量，分别与点的位置一一对应起来，如果需要画颜色，就需要用另一个变量与点的颜色一一对应起来。
+> 说人话：我们画一张散点图，就要把 数据框的两个变量，分别与点的位置一一对应起来，如果点需要画颜色，就需要用数据框的另一个变量与点的颜色对应起来。
 
 
 ## 怎么写代码
@@ -55,7 +55,7 @@ knitr::include_graphics("images/ggplot_template.png")
 
 - **数据 (data)**      （数据框）
 - **映射 (mapping)**
-- **几何对象 (geom)**
+- **几何图形 (geom)**
 - 统计变换 (stats)
 - 标度 (scale)
 - 坐标系 (coord)
@@ -79,6 +79,8 @@ library(tidyverse)
 d <- read_csv("./demo_data/temp_carbon.csv")
 d
 ```
+
+
 ```{r, eval = FALSE}
 library(ggplot2)
 ggplot(data = ___, mapping = aes(x = ___, y = ____)) +
