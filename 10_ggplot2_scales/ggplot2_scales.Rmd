@@ -96,6 +96,38 @@ scale_colour_manual(
 
 ## 使用自己喜欢的颜色
 
+问题来了，颜色怎么对应各种企鹅呢？
+
+
+默认按照 "Adelie", "Chinstrap", "Gentoo" 字母的顺序 
+ 
+```{r}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point(aes(colour = species)) +
+  scale_color_manual(
+    values = c("darkorange", "purple", "cyan4") 
+  )
+```
+
+
+
+也可以按照自己的顺序来对应
+
+```{r}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point(aes(colour = species)) +
+  scale_color_manual(
+     breaks = c("Adelie", "Gentoo", "Chinstrap"), 
+     values = c("darkorange", "purple", "cyan4")
+  )
+```
+
+
+
+最好是这样，一一对应，清晰明了
+
 ```{r}
 penguins %>% 
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
@@ -107,19 +139,10 @@ penguins %>%
 
 
 
-```{r}
-penguins %>% 
-  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
-  geom_point(aes(colour = species)) +
-  scale_color_manual(
-     breaks = c("Adelie", "Chinstrap", "Gentoo"), 
-     values = c("____",  "____",  "____")
-  )
-```
-
-
 
 ## 使用自己喜欢的填充色
+
+方法和上面一样
 
 ```{r}
 penguins %>% 
@@ -132,7 +155,7 @@ penguins %>%
 ```
 
 
-## 使用自己模板的颜色
+## 使用模板配色
 
 
 - 可以使用[ColorBrewer](https://colorbrewer2.org)色彩
@@ -147,10 +170,16 @@ penguins %>%
 - 我比较喜欢使用[colorspace](http://colorspace.r-forge.r-project.org/articles/colorspace.html)模板的配色
 
 ```{r}
+colorspace::qualitative_hcl(n = 3, palette = "cold") %>% 
+  colorspace::swatchplot()
+```
+
+
+```{r}
 penguins %>% 
-   ggplot(aes(bill_length_mm, fill = species)) +
-   geom_density(alpha = 0.6) +
-   colorspace::scale_fill_discrete_qualitative(palette = "cold")
+  ggplot(aes(bill_length_mm, fill = species)) +
+  geom_density(alpha = 0.6) +
+  colorspace::scale_fill_discrete_qualitative(palette = "cold")
 ```
 
 
