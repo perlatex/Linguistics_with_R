@@ -98,7 +98,9 @@ d
 d %>% 
   group_by(type) %>% 
   summarise(
-    across(where(is.numeric), mean),
+    across(where(is.numeric), mean)
+  ) %>% 
+  mutate(
     across(p0:p100, log10)
   )
 ```

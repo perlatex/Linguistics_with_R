@@ -226,11 +226,11 @@ d %>%
   ) +
   theme_light() +
   theme(
-    legend.position = "none",
-    plot.title = element_text(hjust = 0.5), 
-    plot.subtitle = element_text(hjust = 0.5),
-    text = element_text(size = 13),
-    plot.margin = margin(t = 1, r = 0.8, b = 1, l = 1, "cm"),
+    legend.position    = "none",
+    plot.title         = element_text(hjust = 0.5), 
+    plot.subtitle      = element_text(hjust = 0.5),
+    text               = element_text(size = 13),
+    plot.margin        = margin(t = 1, r = 0.8, b = 1, l = 1, "cm"),
     axis.title.y.right = element_text(angle = 0, vjust = 0.5)
   )
 ```

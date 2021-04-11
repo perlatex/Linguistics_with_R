@@ -224,5 +224,7 @@ penguins %>%
 ```
 
 
+## 更多
 
-
+- <https://ggplot2.tidyverse.org/>
+- <https://ggplot2tor.com/scales>

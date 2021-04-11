@@ -66,7 +66,7 @@ df_longer
 ```
 
 
-- 对于数据框`df`，如果p100比p90小，就删除p100（等价于p100赋值为`NA_real_`），然后求出剩下p10到p100列所有值的**均值**和**标准差**
+- 对于数据框`df`，如果p100比p90小，就删除p100（等价于p100赋值为`NA_real_`），然后求出剩下p10到p100列所有数的**均值**和**标准差**
 
 ```{r}
 stat_after_delete <- df %>% 
@@ -88,7 +88,7 @@ my_standard_function <- function(x, mean_value, sd_value) {
 }
 
 # usage
-# my_standard_function(x, stat_after_delete$mean, stat_after_delete$sd)
+# my_standard_function(x, mean_value = stat_after_delete$mean, sd_value = stat_after_delete$sd)
 
 # x 期望是向量
 # 参数 mean_value 是外部传递进来的
@@ -104,7 +104,7 @@ f_longer %>%
   )
 ```
 
-- 再对value列应用五度标调法，这里所谓**五度标调法**，就是下面这个函数
+- 再对value列，应用五度标调法。这里所谓**五度标调法**，就是下面这个函数
 
 ```{r}
 five_step_standard <- function(x) {

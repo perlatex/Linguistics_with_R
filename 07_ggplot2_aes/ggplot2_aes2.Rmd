@@ -351,16 +351,20 @@ ggplot(penguins, aes(x = ___, y = ___)) +
 可以使用`ggsave()`函数，将图片保存为所需要的格式，如".pdf", ".png"等
 
 ```{r}
-p <- penguins %>% 
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point()
+
+
+penguins %>% 
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
   geom_smooth(method = lm) +
   geom_point(aes(color = species)) +
   ggtitle("This is my first plot")
 
-
+# ggsave 会保存最近的一次图片
 ggsave(
-  filename = "my_first_plot.pdf",
-  plot = p,
+  filename = "my_last_plot.pdf",
   width = 8,
   height = 6,
   dpi = 300
