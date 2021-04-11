@@ -1,0 +1,38 @@
+---
+title: "R在语音学中的应用"
+author: "王小二"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: flatly
+    highlight: pygments
+    code_download: true
+    toc: true
+    toc_float: true
+    number_sections: true
+    df_print: paged
+---
+
+
+# 语音学与Praat
+
+- 语音学是一个综合性学科，涉及物理学、生物学、心理学、统计学、社会学等领域。
+- 语音学常用专业软件[Praat](https://www.fon.hum.uva.nl/praat/)，主要用于对数字化的语音信号进行分析、标注、处理及合成等实验，同时生成各种语图和文字报表。
+
+
+
+# R与语音学
+
+- 对Praat的支持
+- 数据统计与分析
+- 可视化
+
+
+
+# 资源
+
+- <https://fu.ff.cuni.cz/praat/rDemo.html>
+- <https://github.com/tjmahr/tjm.praat>
+- <https://github.com/tjmahr/readtextgrid>
+- <https://stefanocoretta.github.io/speakr/index.html>
+- <https://docs.ropensci.org/phonfieldwork>

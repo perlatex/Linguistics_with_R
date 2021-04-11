@@ -1,0 +1,34 @@
+---
+title: "ggplot2之扩展内容"
+author: "王小二"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: flatly
+    highlight: pygments
+    code_download: true
+    toc: true
+    toc_float: true
+    number_sections: true
+    df_print: paged
+---
+
+
+ggplot2的强大，还在于它的扩展包。
+
+
+## 定制颜色
+
+## 文本标签
+
+## 信息高亮
+
+## 组合图片
+
+## 中文字体
+
+## 数学函数
+
+## 统计图层
+
+## 绘制地图
