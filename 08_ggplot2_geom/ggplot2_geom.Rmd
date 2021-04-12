@@ -183,6 +183,16 @@ penguins %>%
     geom_jitter() 
 ```
 
+```{r}
+penguins %>% 
+    ggplot(aes(x = fct_reorder(species, bill_length_mm, median), 
+               y = bill_length_mm)
+           ) +
+    geom_boxplot() +
+    geom_jitter() 
+```
+
+
 
 ### 小提琴图
 ```{r}
