@@ -20,6 +20,7 @@ output:
 假定这里有 `A`, `B`, `C` 和 `D` 四种植物每天生长的记录，
 
 ```{r}
+library(tidyverse)
 plant_height <- data.frame(
   Day = 1:5,
   A = c(0.7, 1.0, 1.5, 1.8, 2.2),
@@ -63,6 +64,15 @@ plant_height %>%
 knitr::include_graphics("images/make_data_tidy.png")
 ```
 
+请观察，数据前后发生了什么变化？
+
+
+- 原来数据框的列名去哪里呢？
+- 原来存放植物高度的数值去哪里呢？
+- 数据框的大小发生了什么变化？
+- 新数据框的列名怎么来的？
+
+
 
 
 # 数据规整
@@ -97,7 +107,7 @@ long
 ```{r, eval=FALSE}
 plant_height %>% 
   pivot_longer(
-    cols = -Day,         # A:D 或者 c(A, B, C, D) 或者 c("A", "B", "C", "D")
+    cols = -Day,     # A:D 或者 c(A, B, C, D) 或者 c("A", "B", "C", "D"), 或者-1, 或者2:5
     names_to = "plant",
     values_to = "height"
 )
@@ -119,6 +129,15 @@ long %>%
   ggplot(aes(x = Day, y = height, color = plant)) +
   geom_line()
 ```
+
+
+## 记住它
+
+```{r, out.width = '100%', fig.align='left', echo = FALSE}
+knitr::include_graphics("images/sandwich_pivot.jpg")
+```
+
+
 
 
 
@@ -186,5 +205,26 @@ penguins %>%
   ) %>%
   ggplot(aes(x = value, y = species, fill = species)) +
   ggridges::geom_density_ridges() +
+  facet_wrap(vars(index), scales = "free")
+```
+
+
+## 课堂练习
+
+用分面画出不同性别的各体征值的箱线图
+
+```{r}
+penguins %>%
+  select(sex, bill_length_mm:body_mass_g) %>%
+  pivot_longer(
+    cols = -sex,
+    names_to = "index",
+    values_to = "value"
+  ) %>%
+  
+  ggplot(aes(y = value, x = sex, color = sex)) +
+
+  geom_boxplot() +
+  geom_jitter() +
   facet_wrap(vars(index), scales = "free")
 ```

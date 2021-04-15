@@ -41,9 +41,10 @@ penguins %>%
 
 ## 丰富的标度体系
 
-ggplot2中标度函数是由"_"分割的三个部分构成的
+ggplot2中标度函数是由"_"分割的三个部分构成的，比如
 ```{r}
 scale_colour_manual()
+scale_x_continuous()
 ```
 
 - scale
@@ -201,6 +202,8 @@ penguins %>%
 ```
 
 
+
+还可以偷懒
 ```{r}
 penguins %>% 
   ggplot(aes(x = bill_length_mm, y = bill_depth_mm)) +
@@ -251,6 +254,10 @@ penguins %>%
      labels = c("3kg", "4kg", "5kg", "6kg")
    )
 ```
+
+这里`range = c(1, 10)`的意思，让体重值最小的点，半径为1；让体重值最大的点，半径为10.
+
+
 
 
 ## 更多
