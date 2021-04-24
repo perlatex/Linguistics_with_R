@@ -29,10 +29,21 @@ output:
 
 
 
-# 资源
+
+# 相关宏包
 
 - <https://fu.ff.cuni.cz/praat/rDemo.html>
 - <https://github.com/tjmahr/tjm.praat>
 - <https://github.com/tjmahr/readtextgrid>
 - <https://stefanocoretta.github.io/speakr/index.html>
 - <https://docs.ropensci.org/phonfieldwork>
+
+
+
+
+# 参考书
+
+- <https://r4ds.had.co.nz/>
+- <http://eleanorchodroff.com/r-for-linguists/index.html>
+- <http://people.linguistics.mcgill.ca/~morgan/book/>
+- <http://www.bodowinter.com/blog/book-release-statistics-for-linguists>
