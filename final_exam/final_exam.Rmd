@@ -1,0 +1,68 @@
+---
+title: "《语言研究中的统计学》期末考试"
+author: "姓名学号"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: flatly
+    highlight: pygments
+    code_download: true
+    toc: true
+    toc_float: true
+    number_sections: true
+    df_print: paged
+---
+
+
+
+
+# 要求
+
+用课堂上学到的R统计编程技能，完成数据分析，数据[来源](http://people.linguistics.mcgill.ca/~morgan/sonderegger_graff_bane_mediumterm_language.pdf)，下载[地址](https://osf.io/dmxuj/).
+
+
+请于2021年6月1日前将以下资料打包并提交`38552109@qq.com`邮箱
+
+- Rmarkdown源代码
+- 分析结果(生成的html文件)
+- 注明学号和姓名
+
+
+# 内容
+
+- 读取data文件夹下的`vot_rmld.csv`
+
+
+- 弄懂实验数据中每个变量的含义，比如
+   - speaking_rate: 短语的语速（音节/秒）
+   - place: 辅音发音的地方
+   - cons_cluster: Whether the stop is in a consonant cluster
+   - foll_high_vowel: Whether the following vowel is high or non-high
+   - gender: 性别
+   - log_celex_freq: 在CELEX语料库中的词频，log转换
+   - speaking_rate_dev: `speaking_rate - speaking_rate_mean`
+
+
+- 统计有多少被试?
+
+- 统计每个被试各自说了几个单词(word)?
+
+- 统计phone 为 /t/ 和 /k/，一共出现了多少次?
+
+- 找出名叫'michael'的被试，他说了几个不重复的单词? 
+
+- 男性VOT均值比女性高吗？
+
+- 按辅音发音位置分组，统计VOT均值
+
+- 按人分组，对变量speaking_rate和VOT标准化
+
+- 不同的voicing用不同的颜色，画出log_vot的密度分布
+
+- 一般情况下，语速越快VOT值越低，请问，实验数据能印证这个观点？（提示，用可视化的方法，画出整体上speaking_rate与log_vot的散点图，然后分面画出每个人的speaking_rate与log_vot的散点图）
+
+- 文章说，非重读音节通常被认为在语音上更加简化，对应于较短的音段，因此VOT较短，是真的吗？（提示，按stress分组画出log_vot的箱线图）
+
+- 自己提出一个问题，用可视化方法探索，并尝试给出解释。
+
+
