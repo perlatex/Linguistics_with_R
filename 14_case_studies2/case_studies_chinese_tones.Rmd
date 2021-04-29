@@ -68,18 +68,33 @@ df_longer
 
 - 对于数据框`df`，如果p100比p90小，就删除p100（等价于p100赋值为`NA_real_`），然后求出剩下p10到p100列所有数的**均值**和**标准差**
 
-```{r}
-stat_after_delete <- df %>% 
-  mutate(p100 = if_else(p100 < p90, NA_real_, p100)) %>%
-  summarise(
-    mean = mean(c_across(p10:p100), na.rm = T),
-      sd =   sd(c_across(p10:p100), na.rm = T)
-  )
-stat_after_delete
 
-stat_after_delete$mean
-stat_after_delete$sd
+```{r}
+m <- df %>%
+  mutate(p100 = if_else(p100 < p90, NA_real_, p100)) %>% 
+  select(p0:p100) %>% 
+  as.matrix()
+
+my_mean <- mean(m, na.rm = TRUE)
+my_sd   <- sd(m, na.rm = TRUE)
 ```
+
+
+
+```{r, eval=FALSE}
+# stat_after_delete <- df %>% 
+#   mutate(p100 = if_else(p100 < p90, NA_real_, p100)) %>%
+#   summarise(
+#     mean = mean(c_across(p10:p100), na.rm = T),
+#       sd =   sd(c_across(p10:p100), na.rm = T)
+#   )
+# stat_after_delete
+# 
+# stat_after_delete$mean
+# stat_after_delete$sd
+```
+
+
 
 - 用以上计算出的均值与标准差，作为参数，传递给下面的函数
 ```{r}
@@ -87,20 +102,21 @@ my_standard_function <- function(x, mean_value, sd_value) {
   (x - mean_value) / sd_value
 }
 
-# usage
-# my_standard_function(x, mean_value = stat_after_delete$mean, sd_value = stat_after_delete$sd)
-
 # x 期望是向量
 # 参数 mean_value 是外部传递进来的
 # 参数 sd_value 是外部传递进来的
+
+# usage
+# my_standard_function(x = value, mean_value = my_mean, sd_value = my_sd)
+
 ```
 
 
 - 用`my_standard_function`应用到`df_longer`中value列
 ```{r}
-f_longer %>% 
+df_longer %>% 
   mutate(
-    value = my_standard_function(value, stat_after_delete$mean, stat_after_delete$sd)
+    value = my_standard_function(x = value, mean_value = my_mean, sd_value = my_sd)
   )
 ```
 
@@ -117,10 +133,10 @@ five_step_standard <- function(x) {
 ```{r}
 df_final <- df_longer %>% 
   mutate(
-    value = my_standard_function(value, stat_after_delete$mean, stat_after_delete$sd)
+    value_std = my_standard_function(x = value, mean_value = my_mean, sd_value = my_sd)
   ) %>%
   mutate(
-    value_std = five_step_standard(value)
+    value_fivestep = five_step_standard(value)
   ) 
 
 df_final
@@ -132,7 +148,7 @@ df_final
 
 ```{r}
 df_final %>%
-  ggplot(aes(x = time, y = value_std, color = type)) +
+  ggplot(aes(x = time, y = value_fivestep, color = type)) +
   geom_point() +
   geom_line() +
   scale_x_continuous(
